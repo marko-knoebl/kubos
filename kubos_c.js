@@ -326,13 +326,8 @@ loadScript('lib/THREE2STL.js');
                     resource_owner_key: userCredentials.resource_owner_key,
                     resource_owner_secret: userCredentials.resource_owner_secret,
                 }
-            }).success( function(msg) {
-                alert(
-                    "You have successfully uploaded a 3D model for printing. " +
-                    "It should be available on <a href=" +
-                    shop_url +
-                    ">" + shop_url + "<\a> in about 3 minutes."
-                )
+            }).success( function(msg, second, jqxhr) {
+                show_print_link(JSON.parse(msg).model_url)
             }).fail( function( xmlHttpRequest, statusText, errorThrown ) {
               alert(
                 "Your form submission failed.\n\n"
@@ -345,6 +340,47 @@ loadScript('lib/THREE2STL.js');
 	);
 	document.body.appendChild(gui.expButton);
 })();
+
+var show_print_link = function(link) {
+    var link_box = document.createElement('div');
+    setStyle(link_box, {
+		position: 'absolute',
+		width: 500,
+		height: 100,
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
+		marginLeft: 'auto',
+		marginRight: 'auto',
+		marginTop: 'auto',
+		marginBottom: 'auto',
+		padding: 16,
+		backgroundColor: '#ffffff',
+		textAlign: 'center'
+	});
+	var link_el = document.createElement('a');
+	link_el.href = link;
+	link_el.innerHTML = link;
+	link_el.target = '_blank';
+	link_el.addEventListener(
+		'mousedown',
+		function() {
+			//window.open(link, '_blank');
+			setTimeout(
+			    function() {
+			        document.body.removeChild(link_box);
+			    }, 500
+			);
+		}
+	);
+	link_box.innerHTML = (
+		'The model has been uploaded to the Shapeways printing service.<br>' +
+		'It will take about a minute until it is ready to print.<br><br>'
+	);
+	link_box.appendChild(link_el);
+	document.body.appendChild(link_box);
+};
 
 var start_solids = function() {
 	document.title = 'Kubos Solids';
