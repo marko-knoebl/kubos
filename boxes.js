@@ -17,7 +17,7 @@
 // the x-y-plane (not shown in the scene)
 var xyplaneMat = new THREE.MeshBasicMaterial();
 xyplaneMat.side = THREE.DoubleSide;
-var xyplane = new THREE.Mesh(new THREE.PlaneGeometry(100000, 100000), xyplaneMat);
+var xyplane = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), xyplaneMat);
 
 // box for previews
 var prevBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshLambertMaterial({color: 0xff0000, transparent: true, opacity: 0.5}));
@@ -67,6 +67,11 @@ renderer.domElement.addEventListener(
 			var intersects = ray.intersectObjects(geoDoc.objects);
 			if (intersects.length === 0) {
 				intersects = ray.intersectObjects([xyplane]);
+			}
+			if (intersects.length === 0) {
+				scene.remove(prevBox);
+				renderer.render(scene, camera);
+				return;
 			}
 			var pnt = intersects[0].point;
 			var x, y, z;
