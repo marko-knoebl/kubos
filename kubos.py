@@ -1,13 +1,16 @@
 import webapp2
-from shapeways.client import Client
 import logging
 from base_handler import BaseHandler
 import json
 import requests
 from requests_oauthlib import OAuth1
+import base64
+import urllib
 
 from keys import client_key
 from keys import client_secret
+from keys import resource_owner_key
+from keys import resource_owner_secret
 
 # oauth documentation: http://requests-oauthlib.readthedocs.org/en/latest/oauth1_workflow.html
 
@@ -18,17 +21,9 @@ class KubosApp(BaseHandler):
 
 class UploadStl(BaseHandler):
     def post(self, *args, **kwargs):
-        import requests
-        from requests_oauthlib import OAuth1
-        import logging
-        import json
-        import base64
-        import urllib
 
         logging.basicConfig(level=logging.INFO)
 
-        from keys import (client_key, client_secret, resource_owner_key,
-            resource_owner_secret)
         oauth = OAuth1(
             client_key = client_key,
             client_secret = client_secret,
