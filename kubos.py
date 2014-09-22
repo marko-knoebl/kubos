@@ -19,6 +19,10 @@ class KubosApp(BaseHandler):
         response = open('/var/www/index.html').read()
         self.response.write(response)
 
+class KubosBoxesApp(BaseHandler):
+    def get(self):
+        self.response.write(open('/var/www/kubos_boxes.html').read())
+
 class UploadStl(BaseHandler):
     def post(self, *args, **kwargs):
 
