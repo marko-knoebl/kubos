@@ -158,4 +158,5 @@ class UploadStl(BaseHandler):
             auth = oauth,
         )
         logging.info('File uploaded to shapeways. Status Code: ' + str(r.status_code))
-        self.response.write('You have successfully uploaded this STL:\n\n' + str(self.request.get('stl_string')))
+        #self.response.write('You have successfully uploaded this STL:\n\n' + str(self.request.get('stl_string')))
+        self.request.status = str(r.status_code)

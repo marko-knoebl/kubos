@@ -7,7 +7,7 @@ import webapp2
 #webapp2.application
 routes = [
     # redirect everyting to handlers.HelloWorldHandler
-    ('/', 'handlers.HelloWorldHandler'),
+    ('/', 'kubos.KubosApp'),
     ('/app', 'guestbook.MainPage'),
     ('/authorize', 'guestbook.Guestbook'),
     ('/kubos', 'kubos.KubosApp'),
