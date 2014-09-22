@@ -314,6 +314,8 @@ loadScript('lib/THREE2STL.js');
 			console.log(stlString);
 			// source for "post" is in boxes.js
 
+            var shop_url = 'https://www.shapeways.com/shops/marko_knoebl?sort=newest'
+
 			$.ajax({
                 type: "POST",
                 url: "/upload_stl",
@@ -325,7 +327,12 @@ loadScript('lib/THREE2STL.js');
                     resource_owner_secret: userCredentials.resource_owner_secret,
                 }
             }).success( function(msg) {
-              alert(msg);
+                alert(
+                    "You have successfully uploaded a 3D model for printing. " +
+                    "It should be available on <a href=" +
+                    shop_url +
+                    ">" + shop_url + "<\a> in about 3 minutes."
+                )
             }).fail( function( xmlHttpRequest, statusText, errorThrown ) {
               alert(
                 "Your form submission failed.\n\n"
@@ -333,14 +340,6 @@ loadScript('lib/THREE2STL.js');
                   + ",\nStatus Text: " + statusText
                   + ",\nError Thrown: " + errorThrown );
             });
-
-
-			//post('/postiiii', {name: stlString});
-			/*setInterval(
-			    function() {
-
-			    }
-			);*/
 		},
 		false
 	);
