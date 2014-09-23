@@ -44,7 +44,7 @@ class UploadStl(BaseHandler):
             url = 'https://api.shapeways.com/models/v1',
             data = json.dumps({
                 'file': file,
-                'fileName': 'test.stl',
+                'fileName': 'kubos.stl',
                 'hasRightsToModel': '1',
                 'acceptTermsAndConditions': '1',
                 'isPublic': '1',

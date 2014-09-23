@@ -25,13 +25,6 @@ var addToolButton, createInputField;
 	};
 })();
 
-var userCredentials = {
-    client_key: null,
-    client_secret: null,
-    resource_owner_key: null,
-    resource_owner_secret: null,
-};
-
 // this object represents the geometric model that is being edited
 var geoDoc;
 (function() {
@@ -84,7 +77,12 @@ var renderer;
 var scene, camera, cameraContainer, renderer, render;
 (function() {
 	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera( 50, (renderer.domElement.clientWidth) / renderer.domElement.clientHeight, 0.1, 1000 );
+	camera = new THREE.PerspectiveCamera(
+	    50,
+	    renderer.domElement.clientWidth / renderer.domElement.clientHeight,
+	    0.1,
+	    1000
+	);
 
 	// set up the camera so the z-axis is vertical
 	camera.rotation.order = 'ZYX';
@@ -96,7 +94,8 @@ var scene, camera, cameraContainer, renderer, render;
 	cameraContainer.position.set(20, 0, 0);
 	cameraContainer.rotation.order = 'ZYX';
 	cameraContainer.ang = {'_phi': 0, '_theta': 0};
-	Object.defineProperty(cameraContainer.ang, 'phi', {
+	Object.defineProperty(cameraContainer.ang, 'phi',
+	    {
 			get: function() {return cameraContainer.ang._phi;},
 			set: function(phi_) {
 				var theta_
@@ -106,7 +105,8 @@ var scene, camera, cameraContainer, renderer, render;
 			}
 		}
 	);
-	Object.defineProperty(cameraContainer.ang, 'theta', {
+	Object.defineProperty(cameraContainer.ang, 'theta',
+	    {
 			get: function() {return cameraContainer.ang._theta;},
 			set: function(theta_) {
 				var phi_
@@ -184,8 +184,12 @@ var scene, camera, cameraContainer, renderer, render;
 })();
 
 var previewMaterial = new THREE.MeshPhongMaterial({
-    color: 0x0099ee, shading: THREE.FlatShading, ambient: 0x0022ee,
-    transparent: true, opacity: 0.5});
+    color: 0x0099ee,
+    shading: THREE.FlatShading,
+    ambient: 0x0022ee,
+    transparent: true,
+    opacity: 0.5
+});
 var mainMaterial = new THREE.MeshPhongMaterial({color: 0x0099ee, shading: THREE.FlatShading, ambient: 0x0022ee});
 
 // set up ray picker
@@ -285,19 +289,36 @@ onerror.num = 0;
 loadScript('lib/THREE2STL.js');
 
 (function() {
-    // kubos banner
-    gui.kubosBanner = document.createElement('img');
-    gui.kubosBanner.src = './icons/r-y-b_tango_banner_vector.svg';
-    setStyle(gui.kubosBanner, {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        width: 180,
-        opacity: 0.7,
-        backgroundColor: '#dddddd',
-        padding: 10,
+    // banner and contact info
+    gui.kubosInfo = document.createElement('div');
+    setStyle(gui.kubosInfo, {
+       position: 'absolute',
+       bottom: 0,
+       left: 0,
+       width: 200,
+       backgroundColor: '#dddddd'
     });
-    document.body.appendChild(gui.kubosBanner);
+    var banner = document.createElement('img');
+    setStyle(banner, {
+        width: 180,
+        padding: 10,
+        textAlign: 'center',
+    })
+    banner.src = './icons/r-y-b_tango_banner_vector.svg';
+    var text = document.createElement('div');
+    text.innerHTML = (
+        'By <em><a href=http://markoknoebl.pythonanywhere.com/ target="_blank">' +
+        'Marko "Karuga" Knöbl</a></em><br>' +
+        '<a href=mailto:marko.kn@gmail.com target="_blank">Hire me</a>.'
+    );
+    setStyle(text, {
+        padding: 6,
+        fontSize: 11,
+        textAlign: 'center',
+    })
+    gui.kubosInfo.appendChild(banner);
+    gui.kubosInfo.appendChild(text);
+    document.body.appendChild(gui.kubosInfo);
 })();
 
 (function() {
@@ -306,7 +327,7 @@ loadScript('lib/THREE2STL.js');
 	gui.expButton.innerHTML = 'Export';
 	setStyle(gui.expButton,
 		{position: 'absolute',
-		bottom: 100,
+		bottom: 120,
 		left: 48,
 		width: 80,
 		height: 80}
@@ -337,11 +358,7 @@ loadScript('lib/THREE2STL.js');
                 type: "POST",
                 url: "/upload_stl",
                 data: {
-                    stl_string:stlString,
-                    client_key: userCredentials.client_key,
-                    client_secret: userCredentials.client_secret,
-                    resource_owner_key: userCredentials.resource_owner_key,
-                    resource_owner_secret: userCredentials.resource_owner_secret,
+                    stl_string:stlString
                 }
             }).success( function(msg, second, jqxhr) {
                 show_print_link(JSON.parse(msg).model_url)
@@ -398,16 +415,5 @@ var show_print_link = function(link) {
 	link_box.appendChild(link_el);
 	document.body.appendChild(link_box);
 };
-
-var start_solids = function() {
-	document.title = 'Kubos Solids';
-	activateTool(selectTool);
-	renderer.render(scene, camera);
-};
-
-// activate mode "solids"
-//loadScript('solids.js', start_solids);
-// activate mode "boxes"
-//loadScript('boxes.js', start_boxes);
 
 renderer.render(scene, camera);
