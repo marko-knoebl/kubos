@@ -290,10 +290,12 @@ loadScript('lib/THREE2STL.js');
     gui.kubosBanner.src = './icons/r-y-b_tango_banner_vector.svg';
     setStyle(gui.kubosBanner, {
         position: 'absolute',
-        bottom: 16,
-        left: 20,
-        width: 160,
-        opacity: 0.4,
+        bottom: 0,
+        left: 0,
+        width: 180,
+        opacity: 0.7,
+        backgroundColor: '#dddddd',
+        padding: 10,
     });
     document.body.appendChild(gui.kubosBanner);
 })();

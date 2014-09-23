@@ -1,4 +1,3 @@
-
 // initialize gui elements (overridden)
 (function() {
 	// set the document style (CSS)

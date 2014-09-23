@@ -120,7 +120,7 @@ gui.remButton.addEventListener(
 		} else {
 			scene.remove(prevBox);
 			renderer.render(scene, camera);
-			gui.remButton.src = './icons/window-close-dark-symbolic.svg';
+			gui.remButton.src = './icons/window-close-red-symbolic.svg';
 		}
 	},
 	false
