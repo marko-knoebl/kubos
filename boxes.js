@@ -3,8 +3,8 @@
 	gui.remButton = document.createElement('img');
 	setStyle(gui.remButton,
 		{position: 'absolute',
-		top: 10,
-		left: 10,
+		top: 16,
+		left: 48,
 		width: 80,
 		height: 80,
 		}

@@ -285,15 +285,29 @@ onerror.num = 0;
 loadScript('lib/THREE2STL.js');
 
 (function() {
+    // kubos banner
+    gui.kubosBanner = document.createElement('img');
+    gui.kubosBanner.src = './icons/r-y-b_tango_banner_vector.svg';
+    setStyle(gui.kubosBanner, {
+        position: 'absolute',
+        bottom: 16,
+        left: 20,
+        width: 160,
+        opacity: 0.4,
+    });
+    document.body.appendChild(gui.kubosBanner);
+})();
+
+(function() {
 	// export button
 	gui.expButton = document.createElement('img');
 	gui.expButton.innerHTML = 'Export';
 	setStyle(gui.expButton,
-		{'position': 'absolute',
-		'top': '10px',
-		'left': '106px',
-		'width': '80px',
-		'height': '80px'}
+		{position: 'absolute',
+		bottom: 100,
+		left: 48,
+		width: 80,
+		height: 80}
 	);
 
 	gui.expButton.src = './icons/printer-symbolic.svg';
