@@ -14,6 +14,8 @@ from keys import resource_owner_secret
 
 # oauth documentation: http://requests-oauthlib.readthedocs.org/en/latest/oauth1_workflow.html
 
+logging.basicConfig(level=logging.INFO)
+
 class KubosApp(BaseHandler):
     def get(self):
         response = open('/var/www/index.html').read()
@@ -24,9 +26,10 @@ class KubosBoxesApp(BaseHandler):
         self.response.write(open('/var/www/kubos_boxes.html').read())
 
 class UploadStl(BaseHandler):
-    def post(self, *args, **kwargs):
+    """This request handler will receive an stl file from the client and
+    upload it to shapeways."""
 
-        logging.basicConfig(level=logging.INFO)
+    def post(self, *args, **kwargs):
 
         oauth = OAuth1(
             client_key = client_key,
@@ -58,5 +61,4 @@ class UploadStl(BaseHandler):
                 'model_url': shapeways_response['urls']['publicProductUrl']['address']
             })
         )
-        #self.response.write('You have successfully uploaded this STL:\n\n' + str(self.request.get('stl_string')))
         self.request.status = str(r.status_code)
