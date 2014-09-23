@@ -172,7 +172,7 @@ var scene, camera, cameraContainer, renderer, render;
 	scene.add(zAxis);
 
 	var light
-	var positions = [[1, 1.1, 1.4], [-1, -1, -0.5]];
+	var positions = [[1, 1.4, 1.2], [-1, -1.2, 1.5]];
 	for (var i = 0; i < 2; i++) {
 		light = new THREE.DirectionalLight(0xffffff, 0.9);
 		light.position.set(positions[i][0], positions[i][1], positions[i][2]);
@@ -301,8 +301,9 @@ loadScript('lib/THREE2STL.js');
 	gui.expButton.addEventListener(
 		'mousedown',
 		function(event) {
-			var result = new ThreeBSP(geoDoc.objects.shift());
-			geoDoc.objects.forEach(
+		    var objects = geoDoc.objects.slice();
+			var result = new ThreeBSP(objects.shift());
+			objects.forEach(
 				function(object) {
 					var bsp1 = new ThreeBSP(object);
 					result = result.union(bsp1);

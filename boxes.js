@@ -20,9 +20,9 @@ xyplaneMat.side = THREE.DoubleSide;
 var xyplane = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), xyplaneMat);
 
 // box for previews
-var prevBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshLambertMaterial({color: 0xff0000, transparent: true, opacity: 0.5}));
+var prevBox = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshPhongMaterial({color: 0x444499, transparent: true, opacity: 0.5}));
 // material for boxes
-var mat = new THREE.MeshLambertMaterial({color: 0xff0000});
+var mat = new THREE.MeshPhongMaterial({color: 0xff9999});
 
 renderer.domElement.addEventListener(
 	'mouseup',
@@ -33,7 +33,7 @@ renderer.domElement.addEventListener(
 			if (modeAdd && (distanceMoved < 1/50)) {
 				// the user has not moved the mouse by more than 1/50 of the screen width
 				var newBox = prevBox.clone();
-				newBox.material = new THREE.MeshLambertMaterial({color: 0xff0000});
+				newBox.material = new THREE.MeshPhongMaterial({color: 0x444499});
 				geoDoc.add(newBox);
 				renderer.render(scene, camera);
 			} else if (!modeAdd) {
