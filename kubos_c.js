@@ -313,7 +313,7 @@ loadScript('lib/THREE2STL.js');
     );
     setStyle(text, {
         padding: 6,
-        fontSize: 11,
+        fontSize: 12,
         textAlign: 'center',
     })
     gui.kubosInfo.appendChild(banner);
@@ -323,19 +323,28 @@ loadScript('lib/THREE2STL.js');
 
 (function() {
 	// export button
-	gui.expButton = document.createElement('img');
-	gui.expButton.innerHTML = 'Export';
-	setStyle(gui.expButton,
-		{position: 'absolute',
-		bottom: 120,
-		left: 48,
-		width: 80,
-		height: 80}
-	);
+	gui.printButton = document.createElement('div');
+	setStyle(gui.printButton, {
+        position: 'absolute',
+        bottom: 190,
+        left: 0,
+        width: 200,
+        textAlign: 'center'
+	});
 
-	gui.expButton.src = './icons/printer-symbolic.svg';
-	gui.expButton.alt = 'Print';
-	gui.expButton.addEventListener(
+	gui.printIcon = document.createElement('img');
+	gui.printIcon.src = './icons/printer-symbolic.svg';
+	gui.printIcon.alt = 'Print';
+    setStyle(gui.printIcon, {
+        width: 80,
+    });
+	gui.printButton.appendChild(gui.printIcon);
+
+    gui.printButtonText = document.createElement('div');
+    gui.printButtonText.innerHTML = '3D-Print Model <div style="font-size:12">(publish on Shapeways)</div>';
+	gui.printButton.appendChild(gui.printButtonText);
+
+	gui.printButton.addEventListener(
 		'mousedown',
 		function(event) {
 		    var objects = geoDoc.objects.slice();
@@ -348,6 +357,9 @@ loadScript('lib/THREE2STL.js');
 			);
 			result = result.toMesh();
 			result.material = mainMaterial;
+			var m = new THREE.Matrix4();
+			m.makeScale(0.003, 0.003, 0.003);
+			result.geometry.applyMatrix(m);
 			var stlString = stlFromGeometry(result.geometry);
 			console.log(stlString);
 			// source for "post" is in boxes.js
@@ -372,7 +384,7 @@ loadScript('lib/THREE2STL.js');
 		},
 		false
 	);
-	document.body.appendChild(gui.expButton);
+	document.body.appendChild(gui.printButton);
 })();
 
 var show_print_link = function(link) {

@@ -1,17 +1,41 @@
 (function() {
 	// rem button
-	gui.remButton = document.createElement('img');
-	setStyle(gui.remButton,
-		{position: 'absolute',
-		top: 16,
-		left: 48,
-		width: 80,
-		height: 80,
-		}
-	);
-	gui.remButton.src = './icons/window-close-symbolic.svg';
-	gui.remButton.alt = 'Remove';
+	gui.remButton = document.createElement('div');
+	setStyle(gui.remButton, {
+	    position: 'absolute',
+	    top: 30,
+	    left: 0,
+	    width: 200,
+	    textAlign: 'center',
+	})
+	gui.remIcon = document.createElement('img');
+	setStyle(gui.remIcon, {
+	    width: 80,
+	})
+	gui.remIcon.src = './icons/window-close-symbolic.svg';
+	gui.remIcon.alt = 'Remove';
+	gui.remButton.appendChild(gui.remIcon);
+
+    gui.remButtonText = document.createElement('div');
+    gui.remButtonText.innerHTML = 'Remove Block';
+    gui.remButtonText.style.textAlign = 'center';
+	gui.remButton.appendChild(gui.remButtonText);
+
 	document.body.appendChild(gui.remButton);
+})();
+
+// link to "Kubos Solids"
+(function() {
+    gui.solidsLink = document.createElement('div');
+    gui.solidsLink.innerHTML = (
+        '<a href="https://kubos.pythonanywhere.com/kubos">Try Kubos Solids ' +
+        '(Beta)'
+    )
+    setStyle(gui.solidsLink, {
+        padding: 6,
+        fontSize: 12,
+    })
+    gui.kubosInfo.appendChild(gui.solidsLink);
 })();
 
 // the x-y-plane (not shown in the scene)
@@ -116,11 +140,11 @@ gui.remButton.addEventListener(
 	function(event) {
 		modeAdd = !modeAdd;
 		if (modeAdd) {
-			gui.remButton.src = './icons/window-close-symbolic.svg';
+			gui.remIcon.src = './icons/window-close-symbolic.svg';
 		} else {
 			scene.remove(prevBox);
 			renderer.render(scene, camera);
-			gui.remButton.src = './icons/window-close-red-symbolic.svg';
+			gui.remIcon.src = './icons/window-close-red-symbolic.svg';
 		}
 	},
 	false

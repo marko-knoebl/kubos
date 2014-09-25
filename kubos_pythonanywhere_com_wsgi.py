@@ -6,9 +6,11 @@
 import webapp2
 #webapp2.application
 routes = [
-    # redirect everyting to handlers.HelloWorldHandler
     ('/', 'kubos.KubosBoxesApp'),
     ('/kubos', 'kubos.KubosApp'),
+    ('/solids', 'kubos.KubosApp'),
+    ('/boxes', 'kubos.KubosBoxesApp'),
+    ('/blocks', 'kubos.KubosBoxesApp'),
     ('/kubos_boxes', 'kubos.KubosBoxesApp'),
     ('/upload_stl', 'kubos.UploadStl'),
     ('/(.+)', 'static_file_handler.StaticFileHandler'),
