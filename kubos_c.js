@@ -341,7 +341,8 @@ loadScript('lib/THREE2STL.js');
         bottom: 70,
         left: 0,
         width: 200,
-        textAlign: 'center'
+        textAlign: 'center',
+        cursor: 'pointer',
 	});
 
 	gui.printIcon = document.createElement('img');

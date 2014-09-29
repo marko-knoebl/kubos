@@ -7,6 +7,7 @@
 	    left: 0,
 	    width: 200,
 	    textAlign: 'center',
+	    cursor: 'pointer',
 	})
 	gui.remIcon = document.createElement('img');
 	setStyle(gui.remIcon, {
