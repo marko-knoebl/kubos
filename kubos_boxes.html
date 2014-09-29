@@ -53,11 +53,15 @@
 					// download: 'https://github.com/chandlerprall/ThreeCSG/raw/master/ThreeCSG.js',
 					loadScript('lib/ThreeCSG.js',
 						function() {
-							loadScript('kubos_c.js',
-								function() {
-									loadScript('boxes.js');
-								}
-							);
+						    loadScript('lib/jquery.mousewheel.min.js',
+						        function() {
+									loadScript('kubos_c.js',
+										function() {
+											loadScript('boxes.js');
+										}
+									);
+						        }
+						    );
 						}
 					);
 				}

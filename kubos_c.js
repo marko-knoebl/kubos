@@ -278,13 +278,10 @@ renderer.domElement.addEventListener(
 	false
 );
 
-renderer.domElement.addEventListener(
-	'wheel',
-	function(event) {
-		cameraContainer.distance += event.deltaY/1;
-		renderer.render(scene, camera); // TODO: move into cameraContainer?
-	}
-);
+$(renderer.domElement).on('mousewheel', function(event) {
+    cameraContainer.distance -= event.deltaY/1;
+    renderer.render(scene, camera);
+});
 
 document.addEventListener(
 	'mouseup',
