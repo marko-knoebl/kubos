@@ -3,7 +3,7 @@
 	gui.remButton = document.createElement('div');
 	setStyle(gui.remButton, {
 	    position: 'absolute',
-	    top: 30,
+	    top: 100,
 	    left: 0,
 	    width: 200,
 	    textAlign: 'center',

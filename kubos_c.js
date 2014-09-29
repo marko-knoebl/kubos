@@ -73,6 +73,26 @@ var renderer;
 	document.body.appendChild( renderer.domElement );
 })();
 
+gui.leftSidebar = document.createElement('div');
+setStyle(gui.leftSidebar, {
+    position: 'absolute',
+    left: 0,
+    top:0,
+    width: 200,
+    backgroundColor: '#ffffff'
+	//'cssFloat': 'left', 'width': '200px', 'backgroundColor': '#ffffff'
+});
+document.body.appendChild(gui.leftSidebar);
+
+gui.banner = document.createElement('img');
+setStyle(gui.banner, {
+    width: 180,
+    padding: 10,
+    textAlign: 'center',
+});
+gui.banner.src = './icons/r-y-b_tango_banner_vector.svg';
+gui.leftSidebar.appendChild(gui.banner);
+
 // set up 3d view
 var scene, camera, cameraContainer, renderer, render;
 (function() {
@@ -298,13 +318,6 @@ loadScript('lib/THREE2STL.js');
        width: 200,
        backgroundColor: '#dddddd'
     });
-    var banner = document.createElement('img');
-    setStyle(banner, {
-        width: 180,
-        padding: 10,
-        textAlign: 'center',
-    })
-    banner.src = './icons/r-y-b_tango_banner_vector.svg';
     var text = document.createElement('div');
     text.innerHTML = (
         'By <em><a href=http://markoknoebl.pythonanywhere.com/ target="_blank">' +
@@ -316,7 +329,6 @@ loadScript('lib/THREE2STL.js');
         fontSize: 12,
         textAlign: 'center',
     })
-    gui.kubosInfo.appendChild(banner);
     gui.kubosInfo.appendChild(text);
     document.body.appendChild(gui.kubosInfo);
 })();
@@ -326,7 +338,7 @@ loadScript('lib/THREE2STL.js');
 	gui.printButton = document.createElement('div');
 	setStyle(gui.printButton, {
         position: 'absolute',
-        bottom: 190,
+        bottom: 70,
         left: 0,
         width: 200,
         textAlign: 'center'

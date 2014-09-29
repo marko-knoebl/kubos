@@ -3,20 +3,22 @@
 	// set the document style (CSS)
 	setStyle(document.body, {
 		'margin': '0px', 'backgroundColor': '#eeeeee', 'fontFamily': 'Arimo, "Liberation Sans", Arial, Helvetica, sans-serif',
-		'fontSize': '16', 'cursor': 'default'});
-	
+		'fontSize': '16', 'cursor': 'default'}
+	);
+
 	// vertical split
-	gui.leftSidebar = document.createElement('div');
-	setStyle(gui.leftSidebar, {
-		'cssFloat': 'left', 'width': '200px', 'backgroundColor': '#ffffff'})
-	document.body.appendChild(gui.leftSidebar);
-	
+	//gui.leftSidebar = document.createElement('div');
+	//setStyle(gui.leftSidebar, {
+	//	'cssFloat': 'left', 'width': '200px', 'backgroundColor': '#ffffff'}
+	//);
+	//document.body.appendChild(gui.leftSidebar);
+
 	gui.toolSelector = document.createElement('div');
 	gui.toolSelector.id = 'toolSelector';
 	gui.toolSelector.style.backgroundColor = '#ffffff';
 	gui.toolSelector.style.margin = '3px';
 	gui.leftSidebar.appendChild(gui.toolSelector);
-	
+
 	gui.toolOptionsContainer = document.createElement('div');
 	gui.toolOptionsContainer.id = 'toolOptionsContainer';
 	gui.leftSidebar.appendChild(gui.toolOptionsContainer);
@@ -37,7 +39,7 @@
 			geoDoc.add(newObject);
 			activateTool(selectTool);
 		}
-	)
+	);
 	gui.toolButtons.appendChild(addButton);
 	var cancelButton = createButton(
 		'Cancel',
@@ -47,27 +49,27 @@
 	);
 	gui.toolButtons.appendChild(cancelButton);
 	gui.toolOptionsContainer.appendChild(gui.toolButtons);
-	
+
 	gui.objectDetailsContainer = document.createElement('div');
 	gui.objectDetailsContainer.style.display = 'none';
 	gui.leftSidebar.appendChild(gui.objectDetailsContainer);
-	
+
 	gui.objectDetails = document.createElement('div');
 	gui.objectDetails.style.backgroundColor = '#eeeeee';
 	gui.objectDetails.style.fontSize = '12';
 	//gui.objectDetails.style.padding = '10px';
 	gui.objectDetailsContainer.appendChild(gui.objectDetails);
-	
+
 	gui.booleanContainer = document.createElement('div');
 	gui.booleanContainer.style.backgroundColor = '#eeeeee';
 	gui.booleanContainer.style.display = 'none';
 	gui.booleanContainer.style.padding = '0px';
 	gui.leftSidebar.appendChild(gui.booleanContainer);
-	
+
 	gui.booleans = document.createElement('div');
 	gui.booleans.style.margin = '0px';
 	gui.booleanContainer.appendChild(gui.booleans);
-	
+
 	var intButton = createButton(
 		'Intersection',
 		function() {
@@ -113,7 +115,7 @@
 	diffButton.style.display = 'block';
 	diffButton.style.margin = '6px';
 	gui.booleans.appendChild(diffButton);
-	
+
 	gui.devArea = document.createElement('div');
 	//gui.leftSidebar.appendChild(gui.devArea);
 })();
@@ -128,8 +130,8 @@ var Tool, boxTool, sphereTool, cylinderTool, coneTool, torusTool, pyramidTool, i
 		this.inputs = inputs;
 		this.getShape = getShape;
 	}
-	Tool.prototype = new Object(); // This could be left out 
-	
+	Tool.prototype = new Object(); // This could be left out
+
 	boxTool = new Tool(
 		'Box',
 		{Depth: 1, Width: 1, Height: 1},
@@ -142,7 +144,7 @@ var Tool, boxTool, sphereTool, cylinderTool, coneTool, torusTool, pyramidTool, i
 			return newObj;
 		}
 	);
-	
+
 	sphereTool = new Tool(
 		'Sphere',
 		{Radius: 1},
@@ -155,7 +157,7 @@ var Tool, boxTool, sphereTool, cylinderTool, coneTool, torusTool, pyramidTool, i
 			return newObj;
 		}
 	);
-	
+
 	cylinderTool = new Tool(
 		'Cylinder',
 		{Radius: 1, Height: 1},
@@ -169,7 +171,7 @@ var Tool, boxTool, sphereTool, cylinderTool, coneTool, torusTool, pyramidTool, i
 			return newObj;
 		}
 	);
-	
+
 	coneTool = new Tool(
 		'Cone',
 		{'Bottom Radius': 1, 'Top Radius': 0, Height: 1},
@@ -184,7 +186,7 @@ var Tool, boxTool, sphereTool, cylinderTool, coneTool, torusTool, pyramidTool, i
 			return newObj;
 		}
 	);
-	
+
 	torusTool = new Tool(
 		'Torus',
 		{'Primary Radius': 2, 'Secondary Radius': 1},
@@ -196,7 +198,7 @@ var Tool, boxTool, sphereTool, cylinderTool, coneTool, torusTool, pyramidTool, i
 			return newObj;
 		}
 	);
-	
+
 	pyramidTool = new Tool(
 		'Pyramid',
 		{'Height': 1, 'Radius': 1, 'Sides': 4},
@@ -210,7 +212,7 @@ var Tool, boxTool, sphereTool, cylinderTool, coneTool, torusTool, pyramidTool, i
 			return newObj;
 		}
 	);
-	
+
 	icosahedronTool = new Tool(
 		'Icosah.',
 		{Radius: 1,},
@@ -222,7 +224,7 @@ var Tool, boxTool, sphereTool, cylinderTool, coneTool, torusTool, pyramidTool, i
 			return newObj;
 		}
 	);
-	
+
 	selectTool = new Tool(
 		'Select',
 		{},
@@ -258,7 +260,7 @@ var onchangeFactory = function(inputName) {
 
 var activateTool = function(tool) {
 	activeTool = tool;
-	
+
 	// deselect all objects
 	selectedObjects.forEach(
 		function(element) {
@@ -267,12 +269,12 @@ var activateTool = function(tool) {
 	);
 	selectedObjects = [];
 	onSelectionChanged(); // TODO: call this automatically
-	
+
 	// remove all inputs
 	while (gui.toolOptions.firstChild) {
 		gui.toolOptions.removeChild(gui.toolOptions.firstChild);
 	}
-	
+
 	if (tool.name !== 'Select') {
 		gui.toolOptions.innerHTML = '<p style="font-size:18px">' + tool.name + ':</p>';
 	} else {
@@ -332,22 +334,22 @@ var onSelectionChanged = function() {
 		originalRotation.y = selectedObjects[0].rotation.y;
 		originalRotation.z = selectedObjects[0].rotation.z;
 		gui.objectDetailsContainer.style.display = 'block';
-		
+
 		// remove all inputs
 		while (gui.objectDetails.firstChild) {
 			gui.objectDetails.removeChild(gui.objectDetails.firstChild);
 		}
-		
+
 		// create inputs to change location
 		for (var i = 0; i < 3; i++) {
 			var name = ['x', 'y', 'z'][i];
 			var label = document.createElement('div');
 			label.innerHTML = name;
-		
+
 			gui.objectDetails.appendChild(label);
-			
+
 			var fn = makeTranslateHandler(name);
-			
+
 			var inputField = createInputField(
 				'number',
 				0,
@@ -355,10 +357,10 @@ var onSelectionChanged = function() {
 			);
 			gui.objectDetails.appendChild(inputField);
 		}
-		
+
 		// select rotation axis
 		gui.objectDetails.innerHTML += '<br>Rotate:<br>';
-		
+
 		['x', 'y', 'z'].forEach( function(axis) {
 			//gui.objectDetails.innerHTML += '<br>';
 			var inputField = document.createElement('input');
@@ -372,7 +374,7 @@ var onSelectionChanged = function() {
 			//gui.objectDetails.innerHTML += axis;
 		});
 		//gui.objectDetails.x.checked = true;
-		
+
 		var anglelbl = document.createElement('div');
 		anglelbl.innerHTML = 'Angle';
 		gui.objectDetails.appendChild(anglelbl);
@@ -390,7 +392,7 @@ var onSelectionChanged = function() {
 			}
 		);
 		gui.objectDetails.appendChild(inputField);
-		
+
 	}
 	if (selectedObjects.length >= 2) {
 		gui.booleanContainer.style.display = 'block';
@@ -411,7 +413,7 @@ renderer.domElement.addEventListener(
 				if (activeTool === selectTool) {
 					var ray = projector.pickingRay(mouse2D, camera);
 					var intersects = ray.intersectObjects(geoDoc.objects);
-					
+
 					if (intersects.length === 0) {
 						// user did not click on an object - deselect all objects)
 						selectedObjects.forEach(
