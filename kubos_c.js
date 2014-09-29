@@ -1,5 +1,7 @@
 "use strict";
 
+if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
 // gui helper functions for Kubos
 var addToolButton, createInputField;
 (function() {
