@@ -6,19 +6,11 @@
 	<body>
 	    <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="lib/Detector.js"></script>
+        <script type="text/javascript" src="klib/setStyle.js"></script>
 		<script>
 			"use strict";
 
 			// generic helper functions
-
-			// set the style of an object via JavaScript
-			var setStyle = function(obj, style) {
-				for (var prop in style) {
-					if (style.hasOwnProperty(prop)) {
-						obj.style[prop] = style[prop];
-					}
-				}
-			};
 
 			//from http://stackoverflow.com/questions/950087/how-to-include-a-javascript-file-in-another-javascript-file
 			var loadScript = function(url, callback) {
