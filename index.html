@@ -6,46 +6,11 @@
 	<body>
 	    <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="lib/Detector.js"></script>
+        <script type="text/javascript" src="klib/setStyle.js"></script>
+        <script type="text/javascript" src="klib/load_script.js"></script>
+        <script type="text/javascript" src="klib/create_button.js"></script>
 		<script>
 			"use strict";
-
-			// generic helper functions
-
-			// set the style of an object via JavaScript
-			var setStyle = function(obj, style) {
-				for (var prop in style) {
-					if (style.hasOwnProperty(prop)) {
-						obj.style[prop] = style[prop];
-					}
-				}
-			};
-
-			//from http://stackoverflow.com/questions/950087/how-to-include-a-javascript-file-in-another-javascript-file
-			var loadScript = function(url, callback) {
-				// Adding the script tag to the head as suggested before
-				var head = document.getElementsByTagName('head')[0];
-				var script = document.createElement('script');
-				script.type = 'text/javascript';
-				script.src = url;
-
-				// Then bind the event to the callback function.
-				// There are several events for cross browser compatibility.
-				script.onreadystatechange = callback;
-				script.onload = callback;
-
-				// Fire the loading
-				head.appendChild(script);
-			};
-
-			var createButton = function(text, onclick) {
-				var button = document.createElement('button');
-				setStyle(button, {
-					'margin': '3px', 'border': '0px', 'height': '24px', 'width': '58px',
-					'backgroundColor': '#1ba1e2', 'color': '#ffffff', 'fontSize': '12'});
-				button.innerHTML = text;
-				button.onclick = onclick;
-				return button;
-			}
 
 			var kubosBoxesBtn = createButton(
 				'Kubos Boxes',
