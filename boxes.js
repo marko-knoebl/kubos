@@ -39,6 +39,8 @@
     gui.kubosInfo.appendChild(gui.solidsLink);
 })();
 
+document.title = 'Kubos Blocks';
+
 // the x-y-plane (not shown in the scene)
 var xyplaneMat = new THREE.MeshBasicMaterial();
 xyplaneMat.side = THREE.DoubleSide;

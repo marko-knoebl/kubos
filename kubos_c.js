@@ -163,7 +163,7 @@ var scene, camera, cameraContainer, renderer, render;
 	// create grid
 	var gridGeom;
 	gridGeom = new THREE.Geometry();
-	var gridMat = new THREE.LineBasicMaterial({color: 0xdddddd, shading: THREE.FlatShading});
+	var gridMat = new THREE.LineBasicMaterial({color: 0xcccccc, shading: THREE.FlatShading});
 	var i;
 	var lineGeom, line;
 	for (i = -10; i <= 10; i++) {
@@ -337,7 +337,7 @@ loadScript('lib/THREE2STL.js');
 	gui.printButton = document.createElement('div');
 	setStyle(gui.printButton, {
         position: 'absolute',
-        bottom: 70,
+        bottom: 90,
         left: 0,
         width: 200,
         textAlign: 'center',
